@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2483F04330B25F4300004A4D /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2483F04230B25F4300004A4D /* SceneDelegate.swift */; };
 		2D2D9DEE677DFE08A3D2AA55 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3726507C3AB5B541DCA0590F /* AppDelegate.swift */; };
 		3785D5746CFA7A5071F83506 /* Protocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = D441A5091FCAC95C165E2294 /* Protocol.swift */; };
 		4A1A08AF95087F49CD3F5F65 /* AppSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDB8BFC8D7B116397043E21B /* AppSettings.swift */; };
@@ -21,7 +22,8 @@
 /* Begin PBXFileReference section */
 		072FBBF44EEF0B2330900CB6 /* IPadMonitor.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = IPadMonitor.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0D9A5372E4B89765BB280207 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
-		24D62F8130B25E2800EDDF2A /* icon.icon */ = {isa = PBXFileReference; lastKnownFileType = folder.iconcomposer.icon; path = icon.icon; sourceTree = "<group>"; };
+		2483F04230B25F4300004A4D /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		24B7052D30B265A6000D2617 /* AppIcon.icon */ = {isa = PBXFileReference; lastKnownFileType = folder.iconcomposer.icon; path = AppIcon.icon; sourceTree = "<group>"; };
 		3726507C3AB5B541DCA0590F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5668C42058ADE3B033CF0379 /* DisconnectedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisconnectedViewController.swift; sourceTree = "<group>"; };
 		5CA03FC986B2F7D586C033CB /* VideoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoView.swift; sourceTree = "<group>"; };
@@ -37,7 +39,7 @@
 		24D62F8230B25E2800EDDF2A /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				24D62F8130B25E2800EDDF2A /* icon.icon */,
+				24B7052D30B265A6000D2617 /* AppIcon.icon */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -53,6 +55,7 @@
 		3FDC43CE009AD591760F714D /* Sources */ = {
 			isa = PBXGroup;
 			children = (
+				24D62F8230B25E2800EDDF2A /* Resources */,
 				3726507C3AB5B541DCA0590F /* AppDelegate.swift */,
 				DDB8BFC8D7B116397043E21B /* AppSettings.swift */,
 				97C775F26A4DCCDD5717984C /* ConnectedViewController.swift */,
@@ -63,7 +66,7 @@
 				E0C342F5A1D35CA5E6C71A00 /* RootViewController.swift */,
 				0D9A5372E4B89765BB280207 /* SettingsViewController.swift */,
 				5CA03FC986B2F7D586C033CB /* VideoView.swift */,
-				24D62F8230B25E2800EDDF2A /* Resources */,
+				2483F04230B25F4300004A4D /* SceneDelegate.swift */,
 			);
 			path = Sources;
 			sourceTree = "<group>";
@@ -139,6 +142,7 @@
 				F8D7DD1E1770D33B3027AF7B /* ConnectedViewController.swift in Sources */,
 				E7335B617A9FD7880B30E70A /* DisconnectedViewController.swift in Sources */,
 				B5545412DA0CF49458635D11 /* LinkServer.swift in Sources */,
+				2483F04330B25F4300004A4D /* SceneDelegate.swift in Sources */,
 				3785D5746CFA7A5071F83506 /* Protocol.swift in Sources */,
 				C41A804CD9916C1BD32C4D2E /* RootViewController.swift in Sources */,
 				4B01A506F0483118357689EC /* SettingsViewController.swift in Sources */,
@@ -152,12 +156,14 @@
 		3D08C949AF6E4E7539C21DC0 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = icon;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_ASSET_PATHS = Resources;
 				DEVELOPMENT_TEAM = JH89BL3V6C;
 				INFOPLIST_FILE = Sources/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "iPad Monitor";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
 				IPHONEOS_DEPLOYMENT_TARGET = "$(RECOMMENDED_IPHONEOS_DEPLOYMENT_TARGET)";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -174,12 +180,14 @@
 		89A52A96041C535AEA58BAD3 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = icon;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_ASSET_PATHS = Resources;
 				DEVELOPMENT_TEAM = JH89BL3V6C;
 				INFOPLIST_FILE = Sources/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "iPad Monitor";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
 				IPHONEOS_DEPLOYMENT_TARGET = "$(RECOMMENDED_IPHONEOS_DEPLOYMENT_TARGET)";
 				LD_RUNPATH_SEARCH_PATHS = (
