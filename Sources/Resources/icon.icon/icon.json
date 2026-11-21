@@ -1,0 +1,109 @@
+{
+  "fill" : {
+    "automatic-gradient" : "extended-srgb:0.00000,0.53333,1.00000,1.00000"
+  },
+  "groups" : [
+    {
+      "layers" : [
+        {
+          "image-name" : "images.jpeg",
+          "name" : "images",
+          "position" : {
+            "scale" : 0.5,
+            "translation-in-points" : [
+              -250.60000000000002,
+              -265
+            ]
+          }
+        },
+        {
+          "image-name" : "magnific_digitaldevicemockup5387689357_cpUTbY50eP.png",
+          "name" : "magnific_digitaldevicemockup5387689357_cpUTbY50eP",
+          "position" : {
+            "scale" : 0.15,
+            "translation-in-points" : [
+              -250.52499999999998,
+              -274
+            ]
+          }
+        },
+        {
+          "image-name" : "ink-charlie-kirk-e90163ac.png",
+          "name" : "ink-charlie-kirk-e90163ac",
+          "position" : {
+            "scale" : 1,
+            "translation-in-points" : [
+              170.8499999999999,
+              0
+            ]
+          }
+        }
+      ],
+      "shadow" : {
+        "kind" : "neutral",
+        "opacity" : 0.5
+      },
+      "translucency" : {
+        "enabled" : true,
+        "value" : 0.3
+      }
+    },
+    {
+      "layers" : [
+        {
+          "image-name" : "images.jpeg",
+          "name" : "images",
+          "position" : {
+            "scale" : 0.5,
+            "translation-in-points" : [
+              -250.60000000000002,
+              188.5
+            ]
+          }
+        },
+        {
+          "fill-specializations" : [
+            {
+              "appearance" : "dark",
+              "value" : "none"
+            }
+          ],
+          "image-name" : "laptop-realistic.png",
+          "name" : "laptop-realistic",
+          "position" : {
+            "scale" : 0.15,
+            "translation-in-points" : [
+              -250.60000000000002,
+              188.5
+            ]
+          }
+        },
+        {
+          "image-name" : "Image.png",
+          "name" : "Image",
+          "position" : {
+            "scale" : 0.05,
+            "translation-in-points" : [
+              -250.07500000000005,
+              0
+            ]
+          }
+        }
+      ],
+      "shadow" : {
+        "kind" : "neutral",
+        "opacity" : 0.5
+      },
+      "translucency" : {
+        "enabled" : true,
+        "value" : 0.3
+      }
+    }
+  ],
+  "supported-platforms" : {
+    "circles" : [
+      "watchOS"
+    ],
+    "squares" : "shared"
+  }
+}

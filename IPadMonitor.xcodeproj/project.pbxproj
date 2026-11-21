@@ -21,6 +21,7 @@
 /* Begin PBXFileReference section */
 		072FBBF44EEF0B2330900CB6 /* IPadMonitor.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = IPadMonitor.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0D9A5372E4B89765BB280207 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		24D62F8130B25E2800EDDF2A /* icon.icon */ = {isa = PBXFileReference; lastKnownFileType = folder.iconcomposer.icon; path = icon.icon; sourceTree = "<group>"; };
 		3726507C3AB5B541DCA0590F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5668C42058ADE3B033CF0379 /* DisconnectedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisconnectedViewController.swift; sourceTree = "<group>"; };
 		5CA03FC986B2F7D586C033CB /* VideoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoView.swift; sourceTree = "<group>"; };
@@ -33,6 +34,14 @@
 /* End PBXFileReference section */
 
 /* Begin PBXGroup section */
+		24D62F8230B25E2800EDDF2A /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				24D62F8130B25E2800EDDF2A /* icon.icon */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
 		372EEBFB0E9D6DBC9EDBBDF4 /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -54,6 +63,7 @@
 				E0C342F5A1D35CA5E6C71A00 /* RootViewController.swift */,
 				0D9A5372E4B89765BB280207 /* SettingsViewController.swift */,
 				5CA03FC986B2F7D586C033CB /* VideoView.swift */,
+				24D62F8230B25E2800EDDF2A /* Resources */,
 			);
 			path = Sources;
 			sourceTree = "<group>";
@@ -142,11 +152,13 @@
 		3D08C949AF6E4E7539C21DC0 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_APPICON_NAME = icon;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = JH89BL3V6C;
 				INFOPLIST_FILE = Sources/Info.plist;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
 				IPHONEOS_DEPLOYMENT_TARGET = "$(RECOMMENDED_IPHONEOS_DEPLOYMENT_TARGET)";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -162,11 +174,13 @@
 		89A52A96041C535AEA58BAD3 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_APPICON_NAME = icon;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = JH89BL3V6C;
 				INFOPLIST_FILE = Sources/Info.plist;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
 				IPHONEOS_DEPLOYMENT_TARGET = "$(RECOMMENDED_IPHONEOS_DEPLOYMENT_TARGET)";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
