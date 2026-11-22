@@ -10,6 +10,7 @@ final class ConnectedViewController: UIViewController {
     private let link: LinkServer
     private var flags: FeatureFlags
     private let overlay = PaddedLabel()
+    private let config = UIButton(type: .system)
     private var timer: Timer?
     private var frameCount = 0
 
@@ -23,11 +24,29 @@ final class ConnectedViewController: UIViewController {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) is not supported")
     }
+    
+    @objc private func handleDoubleTap(_ gesture: UITapGestureRecognizer) {
+        let point = gesture.location(in: view)
+        let activationArea = CGRect(
+            x: view.bounds.maxX - 120,
+            y: view.safeAreaInsets.top,
+            width: 120,
+            height: 120
+        )
+        
+        guard activationArea.contains(point) else { return }
+        config.isHidden.toggle()
+        DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+            self.config.isHidden.toggle()
+        }
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .black
+        
 
+        
         videoView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(videoView)
         NSLayoutConstraint.activate([
@@ -54,6 +73,42 @@ final class ConnectedViewController: UIViewController {
         videoView.onFrameDrawn = { [weak self] in self?.frameCount += 1 }
         timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { [weak self] _ in self?.tick() }
         tick()
+        let doubleTap = UITapGestureRecognizer(
+            target: self,
+            action: #selector(handleDoubleTap(_:))
+            )
+        
+        doubleTap.numberOfTapsRequired = 2
+        view.addGestureRecognizer(doubleTap)
+        
+        config.setTitle("Settings", for: .normal)
+        config.setTitleColor(.white, for: .normal)
+        config.contentEdgeInsets = UIEdgeInsets(
+            top: 10,
+            left: 20,
+            bottom: 10,
+            right: 20
+        )
+        config.backgroundColor = .darkGray
+        config.layer.cornerRadius = 14
+        config.isHidden = true
+        config.addTarget(self, action: #selector(ConnectedViewController.openSettings), for: .touchUpInside)
+        
+        config.translatesAutoresizingMaskIntoConstraints = false
+        
+        view.addSubview(config)
+
+        NSLayoutConstraint.activate([
+            config.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 8),
+            config.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16)
+        ])
+
+    }
+    
+    @objc private func openSettings() {
+        let vc = SettingsViewController()
+        vc.modalPresentationStyle = .pageSheet
+        present(vc, animated: true)
     }
 
     /// Called when the PC switches features on or off while connected.
@@ -81,6 +136,9 @@ final class ConnectedViewController: UIViewController {
         overlay.text = "\(fps) FPS  ·  \(charging ? "⚡︎ " : "")\(batteryText)"
         link.sendTelemetry(battery: percent, charging: charging, fps: fps)
     }
+    
+
+    
 }
 
 final class PaddedLabel: UILabel {
