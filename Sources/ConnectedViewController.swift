@@ -1,7 +1,6 @@
 import UIKit
 
-/// Shown while connected: the video, and optionally the battery/FPS readout in the top-left corner.
-/// There are deliberately no buttons or other controls on this screen.
+
 final class ConnectedViewController: UIViewController {
     override var prefersStatusBarHidden: Bool { true }
     override var prefersHomeIndicatorAutoHidden: Bool { true }
