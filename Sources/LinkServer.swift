@@ -177,6 +177,17 @@ final class LinkServer {
                completion: .contentProcessed { _ in })
     }
 
+    /// Sends the current feature settings to the connected host.
+    func sendSettingsUpdate(_ flags: FeatureFlags) {
+        var writer = ByteWriter()
+        writer.u16(flags.rawValue)
+        let payload = writer.data
+        queue.async { [weak self] in
+            guard let self, self.established, let connection = self.connection else { return }
+            self.write(connection, .control, Proto.Control.settingsUpdate, payload: payload)
+        }
+    }
+
     /// Battery 0-100 (255 = unknown), charging flag, and frames per second actually drawn.
     func sendTelemetry(battery: Int, charging: Bool, fps: Int) {
         var w = ByteWriter()

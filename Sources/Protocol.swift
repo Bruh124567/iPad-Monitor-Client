@@ -27,7 +27,7 @@ enum Proto {
     }
 }
 
-struct FeatureFlags: OptionSet {
+struct FeatureFlags: OptionSet, Hashable {
     let rawValue: UInt16
     static let touch = FeatureFlags(rawValue: 1 << 0)
     static let audio = FeatureFlags(rawValue: 1 << 1)

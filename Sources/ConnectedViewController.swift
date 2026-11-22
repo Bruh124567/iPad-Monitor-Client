@@ -12,6 +12,7 @@ final class ConnectedViewController: UIViewController {
     private let config = UIButton(type: .system)
     private var timer: Timer?
     private var frameCount = 0
+    private weak var settingsViewController: SettingsViewController?
 
     init(videoView: VideoView, link: LinkServer, flags: FeatureFlags) {
         self.videoView = videoView
@@ -105,7 +106,11 @@ final class ConnectedViewController: UIViewController {
     }
     
     @objc private func openSettings() {
-        let vc = SettingsViewController()
+        let vc = SettingsViewController { [weak self] flags in
+            self?.apply(flags: flags)
+            self?.link.sendSettingsUpdate(flags)
+        }
+        settingsViewController = vc
         vc.modalPresentationStyle = .pageSheet
         present(vc, animated: true)
     }
@@ -113,7 +118,9 @@ final class ConnectedViewController: UIViewController {
     /// Called when the PC switches features on or off while connected.
     func apply(flags: FeatureFlags) {
         self.flags = flags
+        AppSettings.apply(flags: flags)
         overlay.isHidden = !flags.contains(.overlay)
+        settingsViewController?.apply(flags: flags)
     }
 
     /// Called by the root controller just before this screen is removed.

@@ -1,7 +1,5 @@
 import Foundation
 
-/// iPad-side preferences. They are sent to the PC in the Hello message when a connection starts,
-/// and can only be changed from the disconnected screen.
 enum AppSettings {
     private static let defaults = UserDefaults.standard
 
@@ -23,10 +21,16 @@ enum AppSettings {
     }
 
     static var flags: FeatureFlags {
-        var f: FeatureFlags = []
-        if touchEnabled { f.insert(.touch) }
-        if audioEnabled { f.insert(.audio) }
-        if overlayEnabled { f.insert(.overlay) }
-        return f
+        var flags: FeatureFlags = []
+        if touchEnabled { flags.insert(.touch) }
+        if audioEnabled { flags.insert(.audio) }
+        if overlayEnabled { flags.insert(.overlay) }
+        return flags
+    }
+
+    static func apply(flags: FeatureFlags) {
+        touchEnabled = flags.contains(.touch)
+        audioEnabled = flags.contains(.audio)
+        overlayEnabled = flags.contains(.overlay)
     }
 }

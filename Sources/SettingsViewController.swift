@@ -1,8 +1,19 @@
 import UIKit
 
-/// Presented only from the disconnected screen. Changes are saved immediately and sent to the PC
-/// the next time a connection starts.
+/// Lets the user change the iPad's feature settings. Changes are saved immediately.
 final class SettingsViewController: UIViewController {
+    private let onSettingsChanged: (FeatureFlags) -> Void
+    private var toggles: [FeatureFlags: UISwitch] = [:]
+
+    init(onSettingsChanged: @escaping (FeatureFlags) -> Void = { _ in }) {
+        self.onSettingsChanged = onSettingsChanged
+        super.init(nibName: nil, bundle: nil)
+    }
+
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) is not supported")
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
         overrideUserInterfaceStyle = .dark
@@ -22,18 +33,12 @@ final class SettingsViewController: UIViewController {
         header.axis = .horizontal
         header.alignment = .center
 
-        let touch = makeRow("Touch input", "Send touches on this screen to the PC.", AppSettings.touchEnabled) {
-            AppSettings.touchEnabled = $0
-        }
-        let audio = makeRow("Audio", "Play the PC's sound on this iPad.", AppSettings.audioEnabled) {
-            AppSettings.audioEnabled = $0
-        }
-        let overlay = makeRow("Battery and FPS overlay", "Show them in the top-left corner while connected.", AppSettings.overlayEnabled) {
-            AppSettings.overlayEnabled = $0
-        }
+        let touch = makeRow("Touch input", "Send touches on this screen to the PC.", flag: .touch)
+        let audio = makeRow("Audio", "Play the PC's sound on this iPad.", flag: .audio)
+        let overlay = makeRow("Battery and FPS overlay", "Show them in the top-left corner while connected.", flag: .overlay)
 
         let footer = UILabel()
-        footer.text = "The settings remain available while connected, and are accessible by double tapping in the top-right corner. The PC host can also switch each feature off."
+        footer.text = "Changes apply immediately while connected. The PC host can also update each feature."
         footer.font = .systemFont(ofSize: 13)
         footer.textColor = .gray
         footer.numberOfLines = 0
@@ -50,28 +55,53 @@ final class SettingsViewController: UIViewController {
         ])
     }
 
-    private func makeRow(_ title: String, _ detail: String, _ isOn: Bool, _ onChange: @escaping (Bool) -> Void) -> UIView {
-        let t = UILabel()
-        t.text = title
-        t.textColor = .white
-        t.font = .systemFont(ofSize: 17, weight: .semibold)
-        let d = UILabel()
-        d.text = detail
-        d.textColor = .lightGray
-        d.font = .systemFont(ofSize: 13)
-        d.numberOfLines = 0
-        let labels = UIStackView(arrangedSubviews: [t, d])
+    /// Applies a settings update received from the connected host without sending it back.
+    func apply(flags: FeatureFlags) {
+        AppSettings.apply(flags: flags)
+        for (flag, toggle) in toggles {
+            toggle.setOn(flags.contains(flag), animated: viewIfLoaded?.window != nil)
+        }
+    }
+
+    private func makeRow(_ title: String, _ detail: String, flag: FeatureFlags) -> UIView {
+        let titleLabel = UILabel()
+        titleLabel.text = title
+        titleLabel.textColor = .white
+        titleLabel.font = .systemFont(ofSize: 17, weight: .semibold)
+
+        let detailLabel = UILabel()
+        detailLabel.text = detail
+        detailLabel.textColor = .lightGray
+        detailLabel.font = .systemFont(ofSize: 13)
+        detailLabel.numberOfLines = 0
+
+        let labels = UIStackView(arrangedSubviews: [titleLabel, detailLabel])
         labels.axis = .vertical
         labels.spacing = 2
 
         let toggle = UISwitch()
-        toggle.isOn = isOn
-        toggle.addAction(UIAction { [weak toggle] _ in onChange(toggle?.isOn ?? false) }, for: .valueChanged)
+        toggle.isOn = AppSettings.flags.contains(flag)
+        toggles[flag] = toggle
+        toggle.addAction(UIAction { [weak self, weak toggle] _ in
+            guard let self, let toggle else { return }
+            self.set(flag: flag, enabled: toggle.isOn)
+        }, for: .valueChanged)
 
         let row = UIStackView(arrangedSubviews: [labels, toggle])
         row.axis = .horizontal
         row.alignment = .center
         row.spacing = 12
         return row
+    }
+
+    private func set(flag: FeatureFlags, enabled: Bool) {
+        var flags = AppSettings.flags
+        if enabled {
+            flags.insert(flag)
+        } else {
+            flags.remove(flag)
+        }
+        apply(flags: flags)
+        onSettingsChanged(flags)
     }
 }
