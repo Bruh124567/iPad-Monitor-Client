@@ -19,7 +19,7 @@ final class DisconnectedViewController: UIViewController {
         title.textColor = .white
 
         let hint = UILabel()
-        hint.text = "Connect this iPad to the PC with a USB cable and start the iPad Monitor host.\n\nHint: You can access settings while connected by double tapping the top right corner"
+        hint.text = "Connect this iPad to the PC with a USB cable and start the iPad Monitor host.\n\nHint: You can access settings while connected by double tapping the top-right corner"
         hint.font = .systemFont(ofSize: 17)
         hint.textColor = .lightGray
         hint.textAlignment = .center

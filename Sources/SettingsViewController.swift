@@ -33,7 +33,7 @@ final class SettingsViewController: UIViewController {
         }
 
         let footer = UILabel()
-        footer.text = "These can only be changed while disconnected and take effect on the next connection. The PC host can also switch each feature off."
+        footer.text = "The settings remain available while connected, and are accessible by double tapping in the top-right corner. The PC host can also switch each feature off."
         footer.font = .systemFont(ofSize: 13)
         footer.textColor = .gray
         footer.numberOfLines = 0
