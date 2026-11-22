@@ -62,6 +62,19 @@ final class RootViewController: UIViewController, LinkServerDelegate {
         videoView.reset()
         show(disconnectedVC)
         UIApplication.shared.isIdleTimerDisabled = false
+        presentConnectionLostAlert()
+    }
+
+    private func presentConnectionLostAlert() {
+        let alert = UIAlertController(
+            title: "Connection Lost",
+            message: "The connection to your PC was lost.",
+            preferredStyle: .alert
+        )
+        alert.addAction(UIAlertAction(title: "OK", style: .default))
+        let host = disconnectedVC.presentedViewController ?? disconnectedVC
+        guard !(host is UIAlertController) else { return }
+        host.present(alert, animated: true)
     }
 
     func linkDidUpdateFlags(_ flags: FeatureFlags) {
